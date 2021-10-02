@@ -29,6 +29,7 @@
             br
             br
           = f.input :eyecatch_width, placeholder: '100'
+          = f.label :eyecatch_position
           = f.input_field :eyecatch_position, as: :radio_buttons
           = f.input :description, input_html: { class: 'js-autosize' }
           = f.input :author_id, as: :select2, collection: Author.pluck(:name, :id)
