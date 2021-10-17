@@ -1,0 +1,13 @@
+
+公開済の記事数: <%= @published_article_count %>件
+
+<% if @published_article_yesterday.present? %>
+  昨日公開された記事数: <%= @published_article_yesterday.count %>件
+  <% @published_article_yesterday.each do |article| %>
+    タイトル: <%= article.title %>
+    公開日時: <%= l(article.published_at) %>
+  <% end %>
+<% else %>
+  昨日公開された記事はありません
+<% end %>
+

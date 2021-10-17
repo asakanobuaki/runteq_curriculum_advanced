@@ -19,9 +19,11 @@
 
 # Learn more: http://github.com/javan/whenever
 
-# Rails.rootを使用するために必要
+# Rails.rootを使用するために必要 config/environment.rbを取り込む。
+# 記載しないとNameError: uninitialized constant #<Class:#<Whenever::JobList:...>>::Railsエラーが出る。
 require File.expand_path(File.dirname(__FILE__) + "/environment")
 # cronを実行する環境変数
+# ENV['RAILS_ENV'] = nilの時:developmentを代入。
 rails_env = ENV['RAILS_ENV'] || :development
 # cronを実行する環境変数をセット
 set :environment, rails_env
@@ -32,4 +34,8 @@ job_type :rake, 'cd :path && :environment_variable=:environment bundle exec rake
 
 every 1.hours do
   rake 'article_state:update_article_state'
+end
+
+every 1.day, at: '9am' do
+  rake 'article_summary:mail_report_summary'
 end
